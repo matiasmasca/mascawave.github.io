@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+#map {
+    position: fixed;
+    width:50%;
+}
+#features {
+    width: 50%;
+    margin-left: 50%;
+    font-family: Tw Cen MT;
+    overflow-y: scroll;
+    background-color: #fafafa;
+}
+section {
+    padding:  25px 50px;
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.25;
+    font-size: 20px;
+}
+section.active {
+    opacity: 1;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 1000px;
+}
+</style>
+
+<div id='map'></div>
+<div id='features'>
+    <section id='welcome' class='active'>
+        <h3>Hola!</h3>
+        <p>Bienvenidos al resumen de MascaWave - Desafio Ruta 40.<br><br></p>
+        <p>Este sito muestra el recorrido de Maca con su Honda Wave 97.3cc modelo 2009 siguiendo su sueño de recorrer gran parte del pais y en especial la mitica ruta 40 a bordo de su primer moto.<br><br></p>
+        <br>
+        <p>Dale play! y disfruta el viaje...</p>
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/-u43vgH_SeU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </section>
+    <section id='section1' class='active'>
+        <h3>La Previa</h3>
+        <p>Planificando un poco, preparando la moto y las cosas a llevar...</p>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F595904087443751&width=500" width="500" height="665" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F595103884190438&width=500" width="500" height="615" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section2'>
+        <h3>12 de Marzo de 2018 - La salida</h3>
+        <p>Oficialmente en viaje!!! Tomando algo fresco en basail con ruddy. Un amigo que me sorprendio por la autovia del chaco y me acompañó hasta aca.</p>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F596626930704800&width=500" width="500" height="665" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <br>
+    </section>
+    <section id='section3'>
+        <h3>12 de Marzo - Las Garzas, Santa Fe</h3>
+        <p>Horas más tarde</p>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F596743637359796&width=500" width="500" height="614" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section4'>
+        <h3>13 de Marzo - Vera, Santa Fe</h3>
+        <p>compartiendo algo con nuevos amigos <br><br><iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F596797390687754&width=500" width="500" height="646" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe><br><br></p>
+    </section>
+    <section id='section5'>
+        <h3>14 de Marzo - Esperanza, Santa Fe</h3>
+        <h4>La 4ta. es la vencida</h4>
+        <p>4 pinchaduras en 24hs!<br><br><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F597610403939786%2F&show_text=0&width=476" width="476" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe> </p>
+        <h3>Día 3</h3>
+        En el taller de Maxi
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F597879220579571&width=500" width="500" height="723" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section6'>
+        <h3>15 de Marzo - Clucellas, Santa Fe</h3>
+        <p>En camino a Rio Cuarto, Cordoba</p>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F598101150557378&width=500" width="500" height="684" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section7'>
+        <h3>16 de Marzo - Llegue a Rio Cuarto, Cordoba</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F598662200501273&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h4>A buscar al primo Agustin</h4>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F598964040471089&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section8'>
+        <h3>17 de Marzo - Villa Reducción, Cordoba</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F599284237105736&width=500" width="500" height="684" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section9'>
+        <h3>19 de Marzo - Pilar, Buenos Aires</h3>
+        Despues de 600km llegue a lo de Ariel
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F600245760342917&width=500" width="500" height="710" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F600247993676027&width=500" width="500" height="436" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <p>Domingo...</p>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F600258577008302%2F&show_text=0&width=476" width="476" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <h3>20 de Marzo - Pilar, Buenos Aires</h3>
+        Compras en Buenos Aires y chequeo de la moto...
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F600756373625189&width=500" width="500" height="704" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F601122026921957&width=500" width="500" height="594" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section10'>
+        <h3>22 de Marzo - CABA, Buenos Aires</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F601228513577975&width=500" width="500" height="646" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F601407933560033&width=500" width="500" height="781" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section11'>
+        <h3>23 de Marzo - Olavarria, Buenos Aires</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F601910063509820&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section12'>
+        <h3>23 de Marzo - REFUGIO MOTOVIAJERO RUTA 22 - Km 723 - ARGERICH, Buenos Aires</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F604072893293537&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F602163640151129&width=500" width="500" height="397" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section13'>
+        <h3>24 de Marzo - el Condor, Rio Negro</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F604105859956907&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F602566090110884&width=500" width="500" height="653" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>25 de Marzo</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F603214330046060&width=500" width="500" height="397" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section14'>
+        <h3>26 de Marzo - Puerto Madryn, Chubut</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F603507566683403&width=500" width="500" height="684" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>Las Grutas</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F604135666620593&width=500" width="500" height="781" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>27 de Marzo - Sali en el diario Epoca</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F604155326618627&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>Chau Madryn</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F604304959936997&width=500" width="500" height="416" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>Rowson</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F604728663227960&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F606042896429870&width=500" width="500" height="781" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <p>Rawson Playa para sentarse y desenchufarse.</p>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F615856355448524%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+    </section>
+    <section id='section15'>
+        <h3> 29 de Marzo - Garayalde, Chubut</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F606050153095811&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3> 30 de Marzo - Comodoro Rivadavia, Chubut</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F605851173115709&width=500" width="500" height="633" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>un día más en Comodoro</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F606057279761765&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>Sabado 31 de Comodoro a 3 Cerros.</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F606391983061628&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section16'>
+        <h3>1 de Abril - Caleta Olivia, Chubut</h3>
+        Video de los Lobos <a href="https://photos.app.goo.gl/6RukRNswGQaJo6gD3">https://photos.app.goo.gl/6RukRNswGQaJo6gD3</a>
+        <br>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F607239599643533&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F615853488782144%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+    </section>
+        <section id='section17'>
+        <h3>2 de Abril - Piedra buena a Rio Gallegos </h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F607243266309833&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+        <section id='section18'>
+        <h3>3 de Abril - Rio Gallegos, Santa Cruz</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F608083249559168&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section19'>
+        <h3>4 de Abril - Rio grande a Usuahia</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F608591119508381&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section20'>
+        <h3>5 de Abril - Usuahia</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fphotos%2Fa.590510247983135.1073741829.521067018260792%2F608590969508396%2F%3Ftype%3D3&width=500" width="500" height="502" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <br>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F608591119508381&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>Cerro L'Martial </h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F609806252720201&width=500" width="500" height="800" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F613999282300898%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F613997262301100%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <h3>6 de Abril, Parque Nacional Tierra del Fuego.</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F609889996045160&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F614008445633315%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F614003472300479%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <h3>8 de Abril - Chau Usuahia</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F610089032691923&width=500" width="500" height="723" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>8 de Abril - Usuahia-Tolhuin-Rio Grande. </h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F610930169274476&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section21'>
+        <h3>10 de Abril - Rio Grande - Chile - Rio Gallegos</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F612923915741768&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section22'>
+        <h3>11 de Abril - Rio Gallegos, Santa Cruz</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F611261679241325&width=500" width="500" height="594" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>Hace frio</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F612946532406173&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section23'>
+        <h1>ACA comienza la Ruta 40</h1>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fphotos%2Fa.604124666621693.1073741830.521067018260792%2F612945975739562%2F%3Ftype%3D3&width=500" width="500" height="380" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <p>luego de una caida que le costo más a la moto que a mi... </p>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F613982238969269%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F613987622302064%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <h3>Fotos... la soledad, el inicio del viaje</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F613002689067224&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>Jueves 12 de Abril - Taller y radio</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F613118942388932&width=500" width="500" height="800" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>Viernes 13 de Abril - Punta loyola y laguna azul. </h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F613271625706997&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>Ruta 40 allá voy!!! saliendo de gallegos, destino insierto!!!</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F613353709032122&width=500" width="500" height="723" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section24'>
+        <h3>15, un dia corto pero largo, con ciertas incertidumbres.</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F613890782311748&width=500" width="500" height="781" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section25'>
+        <h3>17 de Abril, De 28 de Noviembre a el Calafate. </h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F614447288922764&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section26'>
+        <h3>18 de abril - Glaciar Perito Moreno</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F615769522123874&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>Jueves 19 - El Calafate. Despues de la tormenta sale el sol.</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F615798055454354&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <p>Lago Argentino</p>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F615860762114750%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <p>La costanera</p>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F615858162115010%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <h3>20 de abril. Camino a el Chalten.</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F617839791916847&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section27'>
+        <h3>21 de abril, los 73 malditos!</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F617846568582836&width=500" width="500" height="781" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <h3>22 de Abril - Bajo Caraloles, Santa Cruz</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F616728845361275&width=500" width="500" height="742" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <p>Video al revez</p>
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fvideos%2F617796191921207%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+        <h3>22 de abril, bajo caracoles a los antiguos.</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F617860855248074&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
+    </section>
+    <section id='section28'>
+        <h3>23 de Abril - Los Antinguos, Santa Cruz</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F618951725138987&width=500" width="500" height="800" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section29'>
+        <h3>24 de Abril - De Rio Mayo a Esquel.</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F619320118435481&width=500" width="500" height="781" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section30'>
+        <h3>25 de abril - PN Los Alerces - El Bolson</h3>
+        <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F619755588391934&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section31'>
+      <h3>Jueves 26 de abril, El bolson, Rio Negro</h3>
+      <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmascawave%2Fposts%2F621144774919682&width=500" width="500" height="762" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+    </section>
+    <section id='section32'>
+      <h3></h3>
+    </section>
+    <section id='section99'>
+      <p>Continuara!<br><br><iframe src="https://giphy.com/embed/UAGnDT9l7cM8w" width="300" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+      <p></p></p>
+    </section>
+</div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiYnJhdmUtZXhwbG9yZXIiLCJhIjoiY2piemVub3VrM2ljNTMzbzB6ZmxuYnczcyJ9.WnNlpz-4Fn-GXFC11M2yaw';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/outdoors-v10',
+        bearing: -0,
+        center: [-58.828680, -27.489677],
+        zoom: 9,
+        speed: 0.8,
+        pitch: 0
+});
+var chapters = {
+    'welcome': {
+        bearing: -0,
+        center: [-58.828680, -27.489677],
+        zoom: 10,
+        speed: 0.8,
+        pitch: 0
+    },
+    'section1': {
+        bearing: -0,
+        center: [-58.835796, -27.485377],
+        zoom: 17.66,
+        speed: 0.8,
+        pitch: 0
+    },
+    'section2': {
+        bearing: -48.00,
+        center: [-58.829088, -27.489101],
+        zoom: 17.66,
+        speed: 0.8,
+        pitch: 60.00
+    },
+    'section3': {
+        bearing: -159.20,
+        center: [-59.501014, -28.845232],
+        zoom: 14.77,
+        speed: 0.6,
+        pitch: 60.00
+    },
+    'section4': {
+        bearing: 12.80,
+        center: [-60.196926, -29.469687],
+        zoom: 13.18,
+        speed: 0.6,
+        pitch: 0.00
+    },
+    'section5': {
+        bearing: -48.00,
+        center: [-60.927165, -31.443877],
+        zoom: 14.93,
+        pitch: 60.00,
+        speed: 0.6
+    },
+    'section6': {
+        zoom: 12.98,
+        bearing: -48.00,
+        pitch: 60.00,
+        center: [-61.714183, -31.464751],
+        speed: 0.8
+    },
+    'section7': {
+        zoom: 12.98,
+        bearing: -48.00,
+        pitch: 60.00,
+        center: [-64.346966, -33.106240],
+        speed: 0.8
+    },
+    'section8': {
+        zoom: 12.88,
+        bearing: 0.00,
+        pitch: 0.00,
+        center: [-63.854830, -33.199306],
+        speed: 0.6
+    },
+    'section9': {
+        zoom: 12.98,
+        bearing: -48.00,
+        pitch: 60.00,
+        center: [-58.916670, -34.450000],
+        speed: 0.6
+    },
+   'section10': {
+        zoom: 18.13,
+        bearing: 0.00,
+        pitch: 50.00,
+        center: [-58.381768, -34.603806],
+        speed: 0.6
+    },
+    'section11': {
+        zoom: 14.00,
+        bearing: 0.00,
+        pitch: 50.00,
+        center: [-60.320180, -36.891600],
+        speed: 0.6
+    },
+    'section12': {
+        zoom: 12.48,
+        bearing: -150.40,
+        pitch: 57.00,
+        center: [-62.596484, -38.768094],
+        speed: 0.6
+    },
+    'section13': {
+        zoom: 13.23,
+        bearing: -142.40,
+        pitch: 60.00,
+        center: [-62.817355, -41.037228],
+        speed: 0.3
+    },
+    'section14': {
+        zoom: 11.00,
+        bearing: -164.87,
+        pitch: 57.00,
+        center: [-65.054432, -42.817864],
+        speed: 0.3
+    },
+    'section15': {
+        zoom: 11.00,
+        bearing: -164.87,
+        pitch: 57.00,
+        center: [-67.500000, -45.866670],
+        speed: 0.3
+    },
+    'section16': {
+        zoom: 11.00,
+        bearing: 156.73,
+        pitch: 60.00,
+        center: [-67.525724, -46.541953],
+        speed: 0.3
+    },
+    'section17': {
+        zoom: 10.04,
+        bearing: -164.00,
+        pitch: 60.00,
+        center: [-68.757605, -50.081289],
+        speed: 0.3
+    },
+    'section18': {
+        zoom: 9.04,
+        bearing: 164.00,
+        pitch: 54.50,
+        center: [-69.510963, -51.704412],
+        speed: 0.3
+    },
+    'section19': {
+        zoom: 12.35,
+        bearing: 131.20,
+        pitch: 60.00,
+        center: [-67.677635, -53.790234],
+        speed: 0.3
+    },
+    'section20': {
+        zoom: 13.18,
+        bearing: 177.60,
+        pitch: 60.00,
+        center: [-68.303797, -54.801629],
+        speed: 0.3
+    },
+    'section21': {
+        zoom: 9.04,
+        bearing: 164.00,
+        pitch: 54.50,
+        center: [-69.510963, -51.704412],
+        speed: 0.3
+    },
+    'section22': {
+        zoom: 9.04,
+        bearing: 164.00,
+        pitch: 54.50,
+        center: [-69.510963, -51.704412],
+        speed: 0.3
+    },
+    'section23': {
+        zoom: 12.04,
+        bearing: 0.00,
+        pitch: 0.00,
+        center: [-68.815920, -51.838177],
+        speed: 0.1
+    },
+    'section24': {
+        zoom: 14.56,
+        bearing: 0.00,
+        pitch: 59.50,
+        center: [-72.082167, -51.679490],
+        speed: 0.3
+    },
+    'section25': {
+        zoom: 14.56,
+        bearing: 0.00,
+        pitch: 54.50,
+        center: [-72.211815, -51.579858],
+        speed: 0.3
+    },
+    'section26': {
+        zoom: 9.62,
+        bearing: 0.00,
+        pitch: 54.50,
+        center: [-72.849822, -50.374577],
+        speed: 0.3
+    },
+    'section27': {
+        zoom: 14.61,
+        bearing: 0.00,
+        pitch: 54.50,
+        center: [-70.924075, -47.442270],
+        speed: 0.3
+    },
+    'section28': {
+        zoom: 12.27,
+        bearing: 15.77,
+        pitch: 60.00,
+        center: [-71.574082, -46.541469],
+        speed: 0.3
+    },
+    'section29': {
+        zoom: 14.86,
+        bearing: 15.77,
+        pitch: 59.50,
+        center: [-70.255595, -45.683613],
+        speed: 0.3
+    },
+    'section30': {
+        zoom: 11.23,
+        bearing: 11.77,
+        pitch: 0.00,
+        center: [-71.485732, -42.930668],
+        speed: 0.3
+    },
+    'section31': {
+        zoom: 14.91,
+        bearing: 11.77,
+        pitch: 60.00,
+        center: [-71.532439, -41.966028],
+        speed: 0.3
+    },
+};
+// On every scroll event, check which element is on screen
+window.onscroll = function() {
+    var chapterNames = Object.keys(chapters);
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+};
+var activeChapterName = 'baker';
+function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+    map.flyTo(chapters[chapterName]);
+    document.getElementById(chapterName).setAttribute('class', 'active');
+    document.getElementById(activeChapterName).setAttribute('class', '');
+    activeChapterName = chapterName;
+}
+function isElementOnScreen(id) {
+    var element = document.getElementById(id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+}
+</script>
+
+</body>
+</html>
